@@ -23,9 +23,19 @@ class Casting
   end
 
   def update()
+    sql = "UPDATE castings
+    SET (fee, movie_id, star_id)
+    = ($1, $2, $3)
+    WHERE id = $4"
+    values = [@fee, @movie_id, @star_id, @id]
+    SqlRunner.run(sql, values)
   end
 
   def delete()
+    sql = "DELETE FROM castings
+    WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
   end
 
   def self.all()
